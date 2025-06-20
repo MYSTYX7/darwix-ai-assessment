@@ -3,12 +3,18 @@ os: linux
 files:
   - source: .
     destination: /home/ubuntu/app
+
 hooks:
   AfterInstall:
+    - location: scripts/chmod_scripts.sh
+      timeout: 60
+      runas: ubuntu
     - location: scripts/install_dependencies.sh
       timeout: 300
       runas: ubuntu
+
   ApplicationStart:
     - location: scripts/start_server.sh
       timeout: 300
       runas: ubuntu
+
